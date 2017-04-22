@@ -13,6 +13,7 @@ import com.okawong.restuarant.dish.Dish;
 public class RestaurantServiceImpl implements RestaurantService {
 	private Statement statement;
 	private PreparedStatement insertPS;
+	private PreparedStatement getPS;
 
 	@Override
 	public void createNewMenu(Connection con, String name) {
@@ -68,6 +69,20 @@ public class RestaurantServiceImpl implements RestaurantService {
 		String getStatement = "SELECT * FROM " + RestaurantConfig.MENU_TABLE_NAME + " WHERE " + RestaurantConfig.ID
 				+ "=" + dishId.toString();
 		// statement = con.cre
+		try {
+			getPS = con.prepareStatement(getStatement);
+			ResultSet rs = getPS.executeQuery();
+			Dish result = null;
+			if (rs.next()) {
+				result = new Dish(rs.getString("NAME"), rs.getDouble("PRICE"), rs.getString("DESCRIPTION"),
+						rs.getString("CATEGORY"), rs.getString("TAGS"));
+				result.setId(rs.getInt("ITEM_ID"));
+			}
+			return result;
+
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
 
 		return null;
 	}
