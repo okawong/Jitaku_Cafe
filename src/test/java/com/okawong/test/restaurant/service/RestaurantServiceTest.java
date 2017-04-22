@@ -58,11 +58,9 @@ public class RestaurantServiceTest {
 		Integer id2 = restaurantService.addDish(generateConnection(), dish2);
 		Integer expectedId1 = 1;
 		Integer expectedId2 = 2;
-		System.out.println("id1:" + id1);
-		System.out.println("id2:" + id2);
 
 		assertEquals(expectedId1, id1);
-		// assertEquals(expectedId2, id2);
+		assertEquals(expectedId2, id2);
 	}
 
 	private void dropTable(Connection con) {

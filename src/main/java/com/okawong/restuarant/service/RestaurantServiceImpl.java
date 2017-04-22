@@ -2,6 +2,7 @@ package com.okawong.restuarant.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -17,7 +18,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public void createNewMenu(Connection con, String name) {
 		// TODO Auto-generated method stub
 		String createTable = "CREATE TABLE " + RestaurantConfig.MENU_TABLE_NAME
-				+ "(ITEM_ID INT AUTO_INCREMENT PRIMARY KEY, NAME VARCHAR(255) NOT NULL, PRICE DECIMAL(10,3), DESCRIPTION VARCHAR(255), CATEGORY VARCHAR(255), TAGS VARCHAR(255))";
+				+ "(ITEM_ID INT IDENTITY PRIMARY KEY, NAME VARCHAR(255) NOT NULL, PRICE DECIMAL(10,3), DESCRIPTION VARCHAR(255), CATEGORY VARCHAR(255), TAGS VARCHAR(255))";
 		try {
 			statement = con.createStatement();
 			statement.execute(createTable);
@@ -43,7 +44,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 			insertPS.setString(3, dish.getDescription());
 			insertPS.setString(4, dish.getCategory());
 			insertPS.setString(5, dish.getTags());
-			Integer id = insertPS.executeUpdate();
+			insertPS.execute();
+			ResultSet rs = insertPS.getGeneratedKeys();
+			Integer id = -1;
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
 			return id;
 		} catch (SQLException e) {
 			System.out.println(e);
@@ -59,7 +65,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Override
 	public Dish getDish(Connection con, Integer dishId) {
-		// TODO Auto-generated method stub
+		String getStatement = "SELECT * FROM " + RestaurantConfig.MENU_TABLE_NAME + " WHERE " + RestaurantConfig.ID
+				+ "=" + dishId.toString();
+		// statement = con.cre
+
 		return null;
 	}
 
