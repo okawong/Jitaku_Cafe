@@ -21,8 +21,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 		try {
 			statement = con.createStatement();
 			statement.execute(createTable);
-		} catch (SQLException e) {
-			System.out.println(e);
+		} catch (SQLException ex) {
+			System.out.println(ex);
 		} finally {
 			try {
 				con.close();
