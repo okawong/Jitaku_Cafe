@@ -64,15 +64,13 @@ public class RestaurantServiceTest {
 	}
 
 	@Test
-	public void getDish() {
+	public void getDishById() {
 		restaurantService.createNewMenu(con, "test");
 		Dish dish = new Dish("Tonkatsu", 9.90);
 		Integer id1 = restaurantService.addDish(generateConnection(), dish);
 		Dish resultDish = restaurantService.getDish(generateConnection(), id1);
 		Integer resultId = resultDish.getId();
 		assertEquals(id1, resultId);
-		System.out.println(resultDish.getName());
-
 	}
 
 	private void dropTable(Connection con) {
