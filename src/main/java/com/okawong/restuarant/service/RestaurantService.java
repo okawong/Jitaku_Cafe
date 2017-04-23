@@ -12,7 +12,7 @@ public interface RestaurantService {
 
 	public Dish getDish(Connection con, Integer dishId);
 
-	public List<Dish> getDishes(Connection con, SearchEntity searchEntity);
+	public List<Dish> getDishes(Connection con, Dish searchDish);
 
 	public List<Dish> getAllDishes(Connection con);
 

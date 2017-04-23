@@ -68,7 +68,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public Dish getDish(Connection con, Integer dishId) {
 		String getStatement = "SELECT * FROM " + RestaurantConfig.MENU_TABLE_NAME + " WHERE " + RestaurantConfig.ID
 				+ "=" + dishId.toString();
-		// statement = con.cre
 		try {
 			getPS = con.prepareStatement(getStatement);
 			ResultSet rs = getPS.executeQuery();
@@ -88,7 +87,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public List<Dish> getDishes(Connection con, SearchEntity searchEntity) {
+	public List<Dish> getDishes(Connection con, Dish searchDish) {
 		// TODO Auto-generated method stub
 		return null;
 	}
